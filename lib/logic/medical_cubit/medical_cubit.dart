@@ -7,7 +7,7 @@ class MedicalCubit extends Cubit<MedicalState> {
   MedicalCubit() : super(MedicalInitialState());
 
   Future<void> getMedicalRecords() async {
-    emit(MedicalLoadingState());
+    // emit(MedicalLoadingState());
     await Future.delayed(Duration(seconds: 1));
     final mockData = [
       UserMedicalRecords(

@@ -6,12 +6,16 @@ import 'package:zest_medical/logic/auth_cubit/auth_state.dart';
 import '../../../../../core/utils/app_router.dart';
 import '../../../../../core/utils/show_snack_bar.dart';
 import '../../../../reusable_widgets/bottom_indicator.dart';
+import '../../../../reusable_widgets/reusable_text_form_filed.dart';
 import '../../../../reusable_widgets/shared_button.dart';
 import '../../shared_widgets/auth_sign_in_out_options.dart';
 import '../../shared_widgets/auth_widget.dart';
 import '../../shared_widgets/devider_section.dart';
 import '../../shared_widgets/have_account_section.dart';
+import '../../shared_widgets/password_form_field.dart';
 import '../../shared_widgets/privacy_policy_terms.dart';
+import '../widgets/intel_phone_widget.dart';
+import '../widgets/selectGender.dart';
 
 class RegisterScreen extends StatelessWidget {
   RegisterScreen({super.key});
@@ -49,13 +53,13 @@ class RegisterScreen extends StatelessWidget {
         key: formKey,
         child: BlocConsumer<AuthCubit, AuthState>(
           listener: (BuildContext context, state) async {
-            if (state is RegisterAuthFailedState) {
+            if (state is RegisterFailedState) {
               ShowMessageHandler.showSnackBar(
                 context,
                 message: state.error,
                 isError: true,
               );
-            } else if (state is RegisterAuthSuccessState) {
+            } else if (state is RegisterSuccessState) {
               ShowMessageHandler.showSnackBar(
                 context,
                 message:
@@ -76,22 +80,43 @@ class RegisterScreen extends StatelessWidget {
                   children: [
                     AuthWidget(
                       title: 'Create Account',
-                      subTitle:
-                          "Sign up now and start exploring all that "
-                          "our app has to offer.We're excited to welcome you to our community!",
-                      listLength: 6,
-                      controller: controllers,
-                      obscureText: false,
-                      hintText: hintText,
-                      isLogin: false,
-                      labelText: hintText,
-                      height1: 0.h,
-                      height2: 1.h,
-                      paddingHeight: 0.4.h,
-                      selectedIndex: selectedIndex,
+                      subTitle: 'Sign up to get started',
+                      fields: [
+                        ReusableTextFormField(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15.sp),
+                          ),
+                          controller: nameController,
+                          hintText: 'Full Name',
+                          obscureText: false,
+                        ),
+                        ReusableTextFormField(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15.sp),
+                          ),
+                          controller: emailController,
+                          hintText: 'Email',
+                          obscureText: false,
+                        ),
+                        IntelPhoneWidget(controller: phoneController),
+                        SelectedGender(
+                          selectedGender: selectedIndex,
+                        ), // No more "index == 3" hacks!
+                        PasswordFormField(
+                          controller: passwordController,
+                          hintText: 'Password',
+                        ),
+                        PasswordFormField(
+                          controller: confirmPassController,
+                          hintText: 'Confirm Password',
+                          validator: (val) => val != passwordController.text
+                              ? "No match"
+                              : null,
+                        ),
+                      ],
                     ),
                     SizedBox(height: 2.h),
-                    state is RegisterAuthLoadingState
+                    state is RegisterLoadingState
                         ? Center(child: CircularProgressIndicator())
                         : SharedButton(
                             onTap: () async {

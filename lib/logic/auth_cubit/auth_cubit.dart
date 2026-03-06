@@ -8,7 +8,7 @@ class AuthCubit extends Cubit<AuthState> {
   AuthCubit({required this.appRepo}) : super(InitialAuthState()) {
     subscription = Connectivity().onConnectivityChanged.listen((status) {
       if (!status.contains(ConnectivityResult.none)) {
-        if (state is ProfileAuthLoadingState) {
+        if (state is GetProfileLoadingState) {
           getUserProfile();
         }
       }
@@ -31,7 +31,7 @@ class AuthCubit extends Cubit<AuthState> {
     required String password,
     required String confirmPassword,
   }) async {
-    emit(RegisterAuthLoadingState());
+    emit(RegisterLoadingState());
     final response = await appRepo.register(
       name: name,
       email: email,
@@ -42,25 +42,37 @@ class AuthCubit extends Cubit<AuthState> {
     );
     response.fold(
       (stringError) {
-        emit(RegisterAuthFailedState(error: stringError));
+        emit(RegisterFailedState(error: stringError));
       },
       (successModel) {
-        emit(RegisterAuthSuccessState(model: successModel));
+        emit(RegisterSuccessState(model: successModel));
       },
     );
   }
 
   Future<void> login({required String email, required String password}) async {
-    emit(LoginAuthLoadingState());
-    final response = await appRepo.login(email: email, password: password);
-    response.fold(
-      (stringError) {
-        emit(LoginAuthFailedState(error: stringError));
-      },
-      (successModel) {
-        emit(LoginAuthSuccessState(model: successModel));
-      },
-    );
+    try {
+      emit(LoginLoadingState());
+      try {
+        final response = await appRepo.login(email: email, password: password);
+        response.fold(
+          (stringError) {
+            emit(LoginFailedState(error: stringError));
+          },
+          (successModel) {
+            emit(LoginSuccessState(model: successModel));
+          },
+        );
+      } catch (e) {
+        emit(LoginFailedState(error: e.toString()));
+      }
+    } catch (e) {
+      emit(
+        LoginFailedState(
+          error: "An unexpected error occurred. Please try again.",
+        ),
+      );
+    }
   }
 
   Future<void> updateProfile({
@@ -71,7 +83,7 @@ class AuthCubit extends Cubit<AuthState> {
     required String password,
     required String confirmPassword,
   }) async {
-    emit(UpdateProfileAuthLoadingState());
+    emit(UpdateProfileLoadingState());
     final response = await appRepo.updateProfile(
       name: name,
       email: email,
@@ -82,29 +94,29 @@ class AuthCubit extends Cubit<AuthState> {
     );
     response.fold(
       (error) {
-        emit(UpdateProfileAuthFailedState(error: error));
+        emit(UpdateProfileFailedState(error: error));
       },
       (successModel) {
-        emit(UpdateProfileAuthSuccessState(model: successModel));
+        emit(UpdateProfileSuccessState(model: successModel));
       },
     );
   }
 
   Future<void> getUserProfile() async {
-    emit(ProfileAuthLoadingState());
+    emit(GetProfileLoadingState());
     try {
       final response = await appRepo.getUserProfileData();
       response.fold(
         (error) {
-          emit(ProfileAuthFailedState(error: error));
+          emit(GetProfileFailedState(error: error));
         },
         (successModel) {
-          emit(ProfileAuthSuccessState(model: successModel));
+          emit(GetProfileSuccessState(model: successModel));
         },
       );
     } catch (e) {
       emit(
-        ProfileAuthFailedState(
+        GetProfileFailedState(
           error: "Something went wrong. Please check your connection.",
         ),
       );

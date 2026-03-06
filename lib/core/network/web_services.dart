@@ -9,9 +9,6 @@ class WebServices extends ApiServices {
   WebServices({required this.dio}) {
     dio.options.baseUrl = EndPoints.baseUrl;
     dio.interceptors.add(ApiInterceptor());
-    dio.options.connectTimeout = Duration(seconds: 5);
-    dio.options.sendTimeout = Duration(seconds: 5);
-    dio.options.receiveTimeout = Duration(seconds: 5);
     dio.interceptors.add(
       LogInterceptor(
         error: true,
@@ -38,7 +35,8 @@ class WebServices extends ApiServices {
       );
       return response.data;
     } on DioException catch (e) {
-      AppFunctions.handelDioException(e);
+      AppFunctions.handleDioExceptions(e);
+      rethrow;
     }
   }
 
@@ -56,7 +54,8 @@ class WebServices extends ApiServices {
       );
       return response.data;
     } on DioException catch (e) {
-      AppFunctions.handelDioException(e);
+      AppFunctions.handleDioExceptions(e);
+      rethrow;
     }
   }
 }

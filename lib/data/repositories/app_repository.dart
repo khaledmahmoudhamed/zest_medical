@@ -45,6 +45,7 @@ class AppRepository {
     required String password,
   }) async {
     try {
+      print("============= Repo: Calling WebServices");
       final response = await webServices.post(
         EndPoints.login,
         data: {ApiKeys.email: email, ApiKeys.password: password},
@@ -54,6 +55,9 @@ class AppRepository {
       return right(user);
     } on ServerExceptions catch (e) {
       return left(e.errorModel.message);
+    } catch (e) {
+      // This catches everything else (like parsing errors)
+      return left("Unexpected error: $e");
     }
   }
 

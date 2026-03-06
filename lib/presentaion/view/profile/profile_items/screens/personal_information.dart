@@ -60,7 +60,7 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
       appBar: PreferredSizedWidget(text: "Personal Information"),
       body: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
-          if (state is ProfileAuthSuccessState) {
+          if (state is GetProfileSuccessState) {
             final user = state.model.getUserData[0];
             nameController.text = user.name;
             emailController.text = user.email;
@@ -70,7 +70,7 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                 : 1;
           }
 
-          if (state is UpdateProfileAuthSuccessState) {
+          if (state is UpdateProfileSuccessState) {
             ShowMessageHandler.showSnackBar(
               context,
               message: "Profile updated successfully!",
@@ -83,12 +83,12 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
           }
         },
         builder: (context, state) {
-          if (state is ProfileAuthLoadingState) {
+          if (state is GetProfileLoadingState) {
             return const Center(child: CircularProgressIndicator());
           }
 
           // Safe error mapping
-          final apiErrors = (state is UpdateProfileAuthFailedState)
+          final apiErrors = (state is UpdateProfileFailedState)
               ? state.error.errors
               : null;
 

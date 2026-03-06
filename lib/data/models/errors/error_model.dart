@@ -8,7 +8,10 @@ class ErrorModel extends Equatable {
 
   factory ErrorModel.fromJson(Map<String, dynamic> jsonError) {
     return ErrorModel(
-      message: jsonError[ApiKeys.errorMessage] ?? "An Error Occurred",
+      message:
+          jsonError["message"] ??
+          // jsonError[ApiKeys.errorMessage] ??
+          "An Error Occurred",
       errors:
           jsonError[ApiKeys.data] != null &&
               jsonError[ApiKeys.data] is Map<String, dynamic>
@@ -18,7 +21,7 @@ class ErrorModel extends Equatable {
   }
 
   @override
-  List<Object> get props => [message, errors!];
+  List<Object?> get props => [message, errors];
 }
 
 class UpdateFieldDataModel extends Equatable {
@@ -56,5 +59,5 @@ class UpdateFieldDataModel extends Equatable {
   }
 
   @override
-  List<Object> get props => [name!, email!, phone!, password!, confirmPass!];
+  List<Object?> get props => [name, email, phone, password, confirmPass];
 }

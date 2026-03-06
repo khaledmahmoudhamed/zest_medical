@@ -22,7 +22,7 @@ class SaveButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SharedButton(
       onTap: onTap,
-      widget: state is UpdateProfileAuthLoadingState
+      widget: state is UpdateProfileLoadingState
           ? SizedBox(
               height: 20,
               width: 20,

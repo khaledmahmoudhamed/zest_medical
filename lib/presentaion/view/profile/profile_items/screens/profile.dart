@@ -30,10 +30,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
       backgroundColor: Colors.white,
       body: BlocBuilder<AuthCubit, AuthState>(
         builder: (context, state) {
-          if (state is ProfileAuthLoadingState) {
+          if (state is GetProfileLoadingState) {
             return const Center(child: CircularProgressIndicator());
           }
-          if (state is ProfileAuthSuccessState) {
+          if (state is GetProfileSuccessState) {
             final user = state.model.getUserData[0];
             return SingleChildScrollView(
               physics: const NeverScrollableScrollPhysics(),
@@ -52,7 +52,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             );
           }
 
-          if (state is ProfileAuthFailedState) {
+          if (state is GetProfileFailedState) {
             if (state.error.contains("Internet")) {
               return NoInternetWidget(
                 onRetry: () {

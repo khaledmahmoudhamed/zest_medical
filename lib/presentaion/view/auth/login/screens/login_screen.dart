@@ -6,12 +6,14 @@ import 'package:zest_medical/logic/auth_cubit/auth_cubit.dart';
 import 'package:zest_medical/logic/auth_cubit/auth_state.dart';
 import '../../../../../core/utils/app_router.dart';
 import '../../../../reusable_widgets/bottom_indicator.dart';
+import '../../../../reusable_widgets/reusable_text_form_filed.dart';
 import '../../../../reusable_widgets/shared_button.dart';
 import '../../forget_password/widgets/forget_password.dart';
 import '../../shared_widgets/auth_sign_in_out_options.dart';
 import '../../shared_widgets/auth_widget.dart';
 import '../../shared_widgets/devider_section.dart';
 import '../../shared_widgets/have_account_section.dart';
+import '../../shared_widgets/password_form_field.dart';
 import '../../shared_widgets/privacy_policy_terms.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -34,13 +36,13 @@ class LoginScreen extends StatelessWidget {
         key: formKey,
         child: BlocConsumer<AuthCubit, AuthState>(
           listener: (BuildContext context, AuthState state) async {
-            if (state is LoginAuthFailedState) {
+            if (state is LoginFailedState) {
               ShowMessageHandler.showSnackBar(
                 context,
                 message: state.error,
                 isError: true,
               );
-            } else if (state is LoginAuthSuccessState) {
+            } else if (state is LoginSuccessState) {
               ShowMessageHandler.showSnackBar(
                 context,
                 message: "Welcome Back ${state.model.data.userName}",
@@ -67,19 +69,26 @@ class LoginScreen extends StatelessWidget {
                       title: 'Welcome Back',
                       subTitle:
                           "We're excited to have you back, can't wait to see what you've been up to since you last logged in.",
-                      listLength: 2,
-                      controller: controllers,
-                      obscureText: false,
-                      hintText: hintText,
-                      isLogin: true,
-                      labelText: hintText,
-                      height1: 0.h,
-                      height2: 5.h,
-                      paddingHeight: 1.h,
+                      fields: [
+                        ReusableTextFormField(
+                          controller: emailController,
+                          hintText: 'Email',
+                          keyboardType: TextInputType.emailAddress,
+                          obscureText: false,
+
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15.sp),
+                          ),
+                        ),
+                        PasswordFormField(
+                          controller: passwordController,
+                          hintText: 'Password',
+                        ),
+                      ],
                     ),
                     ForgetPasswordWidget(),
                     SizedBox(height: 5.h),
-                    state is LoginAuthLoadingState
+                    state is LoginLoadingState
                         ? Center(child: CircularProgressIndicator())
                         : SharedButton(
                             onTap: () {
@@ -114,8 +123,6 @@ class LoginScreen extends StatelessWidget {
                         );
                       },
                     ),
-                    // BottomIndicator(),
-                    // SizedBox(height: 2.h),
                   ],
                 ),
               ),

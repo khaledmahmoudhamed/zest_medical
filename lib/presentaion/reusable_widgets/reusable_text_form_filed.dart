@@ -20,7 +20,7 @@ class ReusableTextFormField extends StatelessWidget {
     this.keyboardType,
     required this.obscureText,
     this.hintStyle,
-    required this.labelText,
+    this.labelText,
     this.errorText,
     this.inputFormatters,
     this.maxLength,
@@ -42,7 +42,7 @@ class ReusableTextFormField extends StatelessWidget {
   final String? Function(String?)? validator;
   final TextInputType? keyboardType;
   final bool obscureText;
-  final String labelText;
+  final String? labelText;
   final List<TextInputFormatter>? inputFormatters;
   final int? maxLength;
   @override

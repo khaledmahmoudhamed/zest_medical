@@ -11,78 +11,78 @@ class InitialAuthState extends AuthState {
   List<Object> get props => [];
 }
 
-class RegisterAuthLoadingState extends AuthState {
+class RegisterLoadingState extends AuthState {
   @override
   List<Object> get props => [];
 }
 
-class RegisterAuthSuccessState extends AuthState {
+class RegisterSuccessState extends AuthState {
   final AuthModel model;
-  RegisterAuthSuccessState({required this.model});
+  RegisterSuccessState({required this.model});
   @override
   List<Object> get props => [model];
 }
 
-class RegisterAuthFailedState extends AuthState {
+class RegisterFailedState extends AuthState {
   final String error;
-  RegisterAuthFailedState({required this.error});
+  RegisterFailedState({required this.error});
   @override
   List<Object> get props => [error];
 }
 
-class LoginAuthLoadingState extends AuthState {
+class LoginLoadingState extends AuthState {
   @override
   List<Object> get props => [];
 }
 
-class LoginAuthSuccessState extends AuthState {
+class LoginSuccessState extends AuthState {
   final LoginModel model;
-  LoginAuthSuccessState({required this.model});
+  LoginSuccessState({required this.model});
   @override
   List<Object> get props => [model];
 }
 
-class LoginAuthFailedState extends AuthState {
+class LoginFailedState extends AuthState {
   final String error;
-  LoginAuthFailedState({required this.error});
+  LoginFailedState({required this.error});
   @override
   List<Object> get props => [error];
 }
 
-class UpdateProfileAuthLoadingState extends AuthState {
+class UpdateProfileLoadingState extends AuthState {
   @override
   List<Object> get props => [];
 }
 
-class UpdateProfileAuthSuccessState extends AuthState {
+class UpdateProfileSuccessState extends AuthState {
   final UserModel model;
-  UpdateProfileAuthSuccessState({required this.model});
+  UpdateProfileSuccessState({required this.model});
   @override
   List<Object> get props => [model];
 }
 
-class UpdateProfileAuthFailedState extends AuthState {
+class UpdateProfileFailedState extends AuthState {
   final ErrorModel error;
-  UpdateProfileAuthFailedState({required this.error});
+  UpdateProfileFailedState({required this.error});
   @override
   List<Object> get props => [error];
 }
 
-class ProfileAuthLoadingState extends AuthState {
+class GetProfileLoadingState extends AuthState {
   @override
   List<Object> get props => [];
 }
 
-class ProfileAuthSuccessState extends AuthState {
+class GetProfileSuccessState extends AuthState {
   final UserModel model;
-  ProfileAuthSuccessState({required this.model});
+  GetProfileSuccessState({required this.model});
   @override
   List<Object> get props => [model];
 }
 
-class ProfileAuthFailedState extends AuthState {
+class GetProfileFailedState extends AuthState {
   final String error;
-  ProfileAuthFailedState({required this.error});
+  GetProfileFailedState({required this.error});
   @override
   List<Object> get props => [error];
 }

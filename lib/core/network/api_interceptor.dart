@@ -23,5 +23,6 @@ class ApiInterceptor extends Interceptor {
       CacheHelper.user!.delete(ApiKeys.token);
       AppRouter.navigatorState.currentState!.pushNamed(AppRouter.login);
     }
+    handler.next(err);
   }
 }

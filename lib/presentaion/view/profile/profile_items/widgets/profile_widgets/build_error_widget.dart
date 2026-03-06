@@ -16,7 +16,9 @@ class BuildErrorWidget extends StatelessWidget {
           const Icon(Icons.error_outline, color: Colors.red, size: 50),
           Text(error, style: const TextStyle(fontWeight: FontWeight.bold)),
           TextButton(
-            onPressed: () => context.read<AuthCubit>().getUserProfile(),
+            onPressed: () {
+              context.read<AuthCubit>().getUserProfile();
+            },
             child: const Text("Retry"),
           ),
         ],

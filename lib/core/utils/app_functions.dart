@@ -8,8 +8,10 @@ class ServerExceptions implements Exception {
 }
 
 class AppFunctions {
-  static void handelDioException(DioException e) {
+  static void handleDioExceptions(DioException e) {
+    print("=========== DioError caught: ${e.type}");
     if (e.response != null && e.response!.data != null) {
+      print("=========== DioError caught: ${e.type}");
       if (e.response!.data is Map<String, dynamic>) {
         throw ServerExceptions(
           errorModel: ErrorModel.fromJson(e.response!.data),
@@ -24,7 +26,7 @@ class AppFunctions {
     }
     switch (e.type) {
       case DioExceptionType.connectionError:
-      case DioExceptionType.unknown:
+        print("=========== DioError caught: ${e.type}");
         throw ServerExceptions(
           errorModel: ErrorModel(
             message:
@@ -37,12 +39,14 @@ class AppFunctions {
         throw ServerExceptions(
           errorModel: ErrorModel(message: "Server took too long to respond"),
         );
+      case DioExceptionType.unknown:
       case DioExceptionType.cancel:
       case DioExceptionType.badCertificate:
         throw ServerExceptions(
           errorModel: ErrorModel.fromJson(e.response!.data),
         );
       case DioExceptionType.badResponse:
+        print("=========== DioError caught: ${e.type}");
         switch (e.response!.statusCode) {
           case 400:
           case 401:
