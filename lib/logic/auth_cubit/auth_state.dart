@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:zest_medical/data/models/errors/error_model.dart';
+import '../../data/models/home_model/doctor_info.dart';
+import '../../data/models/home_model/home_recommended_model.dart';
 import '../../data/models/user_model/login_model.dart';
 import '../../data/models/user_model/register_model.dart';
 import '../../data/models/user_model/user_profile_model.dart';

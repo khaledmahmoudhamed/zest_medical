@@ -1,7 +1,7 @@
 class ApiKeys {
   static const registerMessage = "message";
   static const loginMessage = "message";
-  static const errorMessage = "message";
+  static const message = "message";
   static const name = "name";
   static const email = "email";
   static const phone = "phone";
@@ -16,4 +16,20 @@ class ApiKeys {
   static const userImage = "userImage";
   static const userPaymentStatus = "userPaymentStatus";
   static const addPaymentMethod = "paymentsList";
+  static const doctors = "doctors";
+  static const id = "id";
+  static const photo = "photo";
+  static const address = "address";
+  static const description = "description";
+  static const degree = "degree";
+  static const startTime = "start_time";
+  static const endTime = "end_time";
+  static const appointPrice = "appoint_price";
+  static const specialization = "specialization";
+  static const city = "city";
+  static const governorate = "governrate";
+  static const userBookingDay = "userBookingDay";
+  static const userBookingDate = "userBookingDate";
+  static const userBookingType = "userBookingType";
+  static const userBookingPaymentMethod = "userBookingPaymentMethod";
 }

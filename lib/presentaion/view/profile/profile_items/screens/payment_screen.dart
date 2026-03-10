@@ -16,7 +16,7 @@ class PaymentScreen extends StatelessWidget {
       appBar: PreferredSizedWidget(
         text: "Payment",
         isActionRequired: true,
-        widget: SvgPicture.asset('assets/scanner.svg', fit: BoxFit.contain),
+        actionIcon: SvgPicture.asset('assets/scanner.svg', fit: BoxFit.contain),
       ),
       body: Padding(
         padding: EdgeInsets.only(top: 5.h),

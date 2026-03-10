@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:zest_medical/data/repositories/app_repository.dart';
+import 'package:zest_medical/data/repositories/auth_cubit/auth_repository.dart';
 import 'package:zest_medical/logic/auth_cubit/auth_state.dart';
+
+import '../../data/models/home_model/doctor_info.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit({required this.appRepo}) : super(InitialAuthState()) {

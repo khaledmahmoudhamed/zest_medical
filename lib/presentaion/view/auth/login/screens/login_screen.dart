@@ -75,7 +75,6 @@ class LoginScreen extends StatelessWidget {
                           hintText: 'Email',
                           keyboardType: TextInputType.emailAddress,
                           obscureText: false,
-
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15.sp),
                           ),
@@ -91,6 +90,7 @@ class LoginScreen extends StatelessWidget {
                     state is LoginLoadingState
                         ? Center(child: CircularProgressIndicator())
                         : SharedButton(
+                            alignment: Alignment.center,
                             onTap: () {
                               if (formKey.currentState!.validate()) {
                                 context.read<AuthCubit>().login(

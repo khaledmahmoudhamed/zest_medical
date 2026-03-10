@@ -8,10 +8,7 @@ class ErrorModel extends Equatable {
 
   factory ErrorModel.fromJson(Map<String, dynamic> jsonError) {
     return ErrorModel(
-      message:
-          jsonError["message"] ??
-          // jsonError[ApiKeys.errorMessage] ??
-          "An Error Occurred",
+      message: jsonError[ApiKeys.message] ?? "An Error Occurred",
       errors:
           jsonError[ApiKeys.data] != null &&
               jsonError[ApiKeys.data] is Map<String, dynamic>

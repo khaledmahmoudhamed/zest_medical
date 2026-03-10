@@ -69,6 +69,7 @@ class OnBoardingScreen extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 4.w),
                 child: SharedButton(
+                  alignment: Alignment.center,
                   onTap: () {
                     CacheHelper.isLoggedIn()
                         ? Navigator.of(

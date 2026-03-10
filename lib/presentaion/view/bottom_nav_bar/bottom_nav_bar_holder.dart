@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:zest_medical/logic/navigate_cubit.dart';
+import 'package:zest_medical/logic/toggle/navigate_cubit.dart';
 import '../appointment/appointment_screen.dart';
-import '../chats/chat_screen.dart';
-import '../home/home_screen.dart';
+import '../home/chats/chat_screen.dart';
+import '../home/home/screen/home_screen.dart';
 import '../profile/profile_items/screens/profile.dart';
-import '../serach/search_screen.dart';
+import '../serach/screens/search_screen.dart';
 import 'bottom_nav_bar.dart';
 
 class BottomNavBarHolder extends StatelessWidget {
@@ -14,7 +14,7 @@ class BottomNavBarHolder extends StatelessWidget {
     HomeScreen(),
     ChatScreen(),
     SearchScreen(),
-    AppointmentScreen(),
+    NavAppointmentItem(),
     ProfileScreen(),
   ];
   @override

@@ -16,7 +16,7 @@ class MedicalRecordsScreen extends StatelessWidget {
       appBar: PreferredSizedWidget(
         text: "Medical Record",
         isActionRequired: true,
-        widget: SvgPicture.asset('assets/three_dots.svg', width: 6.w),
+        actionIcon: SvgPicture.asset('assets/three_dots.svg', width: 6.w),
       ),
       body: MedicalRecordWidget(),
     );

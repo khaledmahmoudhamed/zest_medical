@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:zest_medical/presentaion/view/home/doctor_details/screen/doctor_details_screen.dart';
+import '../../data/models/home_model/doctor_info.dart';
 import '../../presentaion/view/auth/forget_password/screens/add_face_id.dart';
 import '../../presentaion/view/auth/forget_password/screens/forget_password.dart';
 import '../../presentaion/view/auth/forget_password/screens/otp_verification.dart';
 import '../../presentaion/view/auth/login/screens/login_screen.dart';
 import '../../presentaion/view/auth/register/screens/register_screen.dart';
 import '../../presentaion/view/bottom_nav_bar/bottom_nav_bar_holder.dart';
-import '../../presentaion/view/profile/profile_items/screens/appointments.dart';
+import '../../presentaion/view/home/book_appointment/sccreen/appointments.dart';
+import '../../presentaion/view/home/recomendation_doctor/screen/screen.dart';
+import '../../presentaion/view/home/speciality/screen/doctor_spciality_screen.dart';
 import '../../presentaion/view/profile/profile_items/screens/medical_records.dart';
 import '../../presentaion/view/profile/profile_items/screens/payment_screen.dart';
 import '../../presentaion/view/profile/profile_items/screens/personal_information.dart';
@@ -37,6 +41,9 @@ class AppRouter {
   static const medicalRecords = '/medicalRecords';
   static const appointments = '/appointments';
   static const paymentScreen = '/paymentScreen';
+  static const doctorSpecialityScreen = '/doctorSpecialityScreen';
+  static const recommendationDoctorScreen = '/recommendationDoctorScreen';
+  static const doctorDetailsScreen = '/doctorDetailsScreen';
   static Route generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case initial:
@@ -70,9 +77,22 @@ class AppRouter {
       case medicalRecords:
         return MaterialPageRoute(builder: (_) => MedicalRecordsScreen());
       case appointments:
-        return MaterialPageRoute(builder: (_) => AppointmentsScreen());
+        final args = settings.arguments as Doctors;
+        return MaterialPageRoute(
+          builder: (_) => AppointmentsScreen(doctors: args),
+        );
       case paymentScreen:
         return MaterialPageRoute(builder: (_) => PaymentScreen());
+      case doctorSpecialityScreen:
+        return MaterialPageRoute(builder: (_) => DoctorSpecialityScreen());
+      case recommendationDoctorScreen:
+        return MaterialPageRoute(builder: (_) => RecommendationDoctorScreen());
+      case doctorDetailsScreen:
+        final args = settings.arguments as Doctors;
+        return MaterialPageRoute(
+          builder: (_) => DoctorDetailsScreen(doctors: args),
+        );
+
       default:
         return errorModel();
     }

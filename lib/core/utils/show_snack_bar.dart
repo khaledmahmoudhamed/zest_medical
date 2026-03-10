@@ -86,11 +86,13 @@ class ShowMessageHandler {
     );
   }
 
-  static void showSuccessDialog(
-    BuildContext context,
-    String total,
+  static void showSuccessDialog({
+    required BuildContext context,
     void Function()? onTap,
-  ) {
+    required String title,
+    required String subTitle,
+    required String close,
+  }) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -103,12 +105,12 @@ class ShowMessageHandler {
             Icon(Icons.check_circle, color: Colors.green, size: 35.sp),
             SizedBox(height: 2.h),
             Text(
-              "Payment Successful!",
+              title,
               style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 1.h),
             Text(
-              "Your transaction was completed Successfully.",
+              subTitle,
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 16.sp),
             ),
@@ -116,11 +118,11 @@ class ShowMessageHandler {
 
             ReusableButton(
               onTap: onTap,
-              padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 1.h),
+              padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 1.h),
               radius: 15.sp,
               containerColor: Color(0xff0867d2),
               child: Text(
-                "Back",
+                close,
                 style: TextStyle(color: Colors.white, fontSize: 18.sp),
               ),
             ),

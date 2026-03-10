@@ -30,6 +30,7 @@ class NoInternetWidget extends StatelessWidget {
           SizedBox(
             width: 60.w,
             child: SharedButton(
+              alignment: Alignment.center,
               onTap: onRetry,
               widget: Text("Retry", style: TextStyle(color: Colors.white)),
             ),

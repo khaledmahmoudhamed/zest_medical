@@ -108,6 +108,7 @@ class _AddCardBottomSheetState extends State<AddCardBottomSheet> {
             ),
             SizedBox(height: 4.h),
             SharedButton(
+              alignment: Alignment.center,
               onTap: () async {
                 if (_formKey.currentState!.validate()) {
                   Navigator.pop(context, {

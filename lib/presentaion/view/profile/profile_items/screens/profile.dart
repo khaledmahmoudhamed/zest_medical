@@ -60,7 +60,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 },
               );
             }
-            return BuildErrorWidget(error: state.error);
+            return BuildErrorWidget(
+              error: state.error,
+              onPressed: () {
+                context.read<AuthCubit>().getUserProfile();
+              },
+            );
           }
 
           return const SizedBox.shrink();

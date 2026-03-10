@@ -41,9 +41,11 @@ class _PaymentBodyWidgetState extends State<PaymentBodyWidget> {
   }
 
   void loadSavedPayments() {
-    final dynamic rawData = CacheHelper.payments!.get(ApiKeys.addPaymentMethod);
-    if (rawData != null) {
-      paymentMethodItems = List<dynamic>.from(rawData).map((element) {
+    final List<dynamic> rawData = CacheHelper.payments!.get(
+      ApiKeys.addPaymentMethod,
+    );
+    if (rawData.isNotEmpty) {
+      paymentMethodItems = rawData.map((element) {
         return Map<String, dynamic>.from(element as Map);
       }).toList();
     } else {
@@ -51,7 +53,7 @@ class _PaymentBodyWidgetState extends State<PaymentBodyWidget> {
         {
           "image": "assets/paypal.svg",
           "title": "PayPal",
-          "subTitle": '************0212',
+          "cardNumber": '************0212',
           'status': "Connected",
         },
       ];
@@ -90,15 +92,13 @@ class _PaymentBodyWidgetState extends State<PaymentBodyWidget> {
                       ),
                       direction: DismissDirection.endToStart,
                       onDismissed: (val) async {
+                        final dismissedItemTitle =
+                            paymentMethodItems[index]['title'];
                         setState(() {
                           paymentMethodItems.removeAt(index);
                         });
+                        await CacheHelper.payments!.delete(dismissedItemTitle);
                         await savePaymentList();
-                        ShowMessageHandler.showSnackBar(
-                          context,
-                          message: "Card removed successfully",
-                          isError: false,
-                        );
                       },
 
                       child: PaymentMethodWidget(
@@ -119,11 +119,15 @@ class _PaymentBodyWidgetState extends State<PaymentBodyWidget> {
                             onPressed: () {
                               Navigator.pop(context);
                               ShowMessageHandler.showSuccessDialog(
-                                context,
-                                "",
-                                () {
+                                context: context,
+
+                                onTap: () {
                                   Navigator.pop(context);
                                 },
+                                title: "Payment Successful!",
+                                subTitle:
+                                    "Your transaction was completed Successfully.",
+                                close: "Back",
                               );
                             },
                           );
@@ -136,6 +140,7 @@ class _PaymentBodyWidgetState extends State<PaymentBodyWidget> {
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.h),
           child: SharedButton(
+            alignment: Alignment.center,
             onTap: () async {
               final result = await showModalBottomSheet<Map<String, dynamic>>(
                 context: context,

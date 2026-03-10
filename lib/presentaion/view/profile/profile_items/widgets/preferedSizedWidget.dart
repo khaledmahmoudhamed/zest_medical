@@ -9,12 +9,12 @@ class PreferredSizedWidget extends StatelessWidget
     super.key,
     required this.text,
     this.isActionRequired = false,
-    this.widget,
+    this.actionIcon,
     this.actionOnTap,
   });
   final String text;
   final bool isActionRequired;
-  final Widget? widget;
+  final Widget? actionIcon;
   final Function()? actionOnTap;
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,7 @@ class PreferredSizedWidget extends StatelessWidget
                         color: Colors.grey[100],
                         borderRadius: BorderRadius.circular(15.sp),
                       ),
-                      child: widget,
+                      child: actionIcon,
                     ),
                   ),
           ],
