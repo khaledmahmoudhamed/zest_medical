@@ -11,7 +11,7 @@ import '../../../../../logic/doctor_cubit/doctor_state.dart';
 import '../../../../reusable_widgets/bottom_indicator.dart';
 import '../../../profile/profile_items/widgets/preferedSizedWidget.dart';
 import '../widgets/bottom_sheet.dart';
-import '../widgets/search_sections.dart';
+import '../widgets/search&icon_row.dart';
 
 class RecommendationDoctorScreen extends StatefulWidget {
   const RecommendationDoctorScreen({super.key});
@@ -29,6 +29,7 @@ class _RecommendationDoctorScreenState
     super.initState();
   }
 
+  final controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,17 +44,22 @@ class _RecommendationDoctorScreenState
         padding: EdgeInsets.only(top: 3.h, left: 2.w, right: 2.w),
         child: Column(
           children: [
-            SearchSections(
+            SearchAndIconRow(
               onChanged: (val) {
                 context.read<DoctorCubit>().searchDoctors(val);
               },
-              onPressed: () {
-                final currentState = context.read<DoctorCubit>().state;
-                BottomSheetClass.showBottomSheet(
-                  context,
-                  currentState.allDoctorsList,
-                );
-              },
+
+              widget: IconButton(
+                onPressed: () {
+                  final currentState = context.read<DoctorCubit>().state;
+                  BottomSheetClass.showBottomSheet(
+                    context,
+                    currentState.allDoctorsList,
+                  );
+                },
+                icon: Icon(Icons.filter_list_sharp, size: 25.sp),
+              ),
+              controller: controller,
             ),
             SizedBox(height: 4.h),
             BlocBuilder<DoctorCubit, DoctorState>(

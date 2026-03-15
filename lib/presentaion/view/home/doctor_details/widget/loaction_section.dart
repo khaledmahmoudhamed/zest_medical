@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:zest_medical/presentaion/view/home/find_nearby/widget/show_map_section.dart';
 import '../../../../reusable_widgets/bottom_indicator.dart';
 
 class LocationSection extends StatelessWidget {
@@ -28,15 +29,7 @@ class LocationSection extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.sp),
               ),
               SizedBox(height: 1.h),
-              Expanded(
-                child: Container(
-                  height: 30.h,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15.sp),
-                    color: Colors.purple,
-                  ),
-                ),
-              ),
+              Expanded(child: ShowMapSection()),
             ],
           ),
         ),

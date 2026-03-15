@@ -39,12 +39,21 @@ class AppFunctions {
         throw ServerExceptions(
           errorModel: ErrorModel(message: "Server took too long to respond"),
         );
-      case DioExceptionType.unknown:
       case DioExceptionType.cancel:
       case DioExceptionType.badCertificate:
         throw ServerExceptions(
           errorModel: ErrorModel.fromJson(e.response!.data),
         );
+      case DioExceptionType.unknown:
+        // Check if it's a socket/http exception
+        if (e.message?.contains('HttpException') ?? false) {
+          throw ServerExceptions(
+            errorModel: ErrorModel(
+              message: "Network connection was closed unexpectedly.",
+            ),
+          );
+        }
+        throw "An unexpected error occurred.";
       case DioExceptionType.badResponse:
         print("=========== DioError caught: ${e.type}");
         switch (e.response!.statusCode) {

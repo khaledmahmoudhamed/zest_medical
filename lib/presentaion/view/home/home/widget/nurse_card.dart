@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:zest_medical/core/utils/app_router.dart';
+import 'package:zest_medical/data/models/home_model/doctor_info.dart';
 import 'package:zest_medical/presentaion/reusable_widgets/reusabel_button.dart';
 
 class NurseCardSection extends StatelessWidget {
   const NurseCardSection({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -32,7 +33,9 @@ class NurseCardSection extends StatelessWidget {
               ),
               SizedBox(height: 2.h),
               ReusableButton(
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, AppRouter.findNearbyScreen);
+                },
                 containerColor: Colors.white,
                 padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.h),
                 child: Text(

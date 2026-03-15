@@ -120,16 +120,6 @@ class AppRepository {
     }
   }
 
-  Future<Either<String, HomeDoctorsModel>> getAllSpecializations() async {
-    try {
-      final response = await webServices.get(EndPoints.allSpecializations);
-      final doctorData = HomeDoctorsModel.fromJson(response);
-      return right(doctorData);
-    } on ServerExceptions catch (e) {
-      return left(e.errorModel.message);
-    }
-  }
-
   Future<Either<String, HomeDoctorsModel>>
   getHomePageRecommendationDoctors() async {
     try {

@@ -1,21 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:zest_medical/core/utils/app_router.dart';
+import 'package:zest_medical/core/utils/show_snack_bar.dart';
+import 'package:zest_medical/data/models/home_model/doctor_info.dart';
 import 'package:zest_medical/presentaion/view/profile/profile_items/widgets/profile_widgets/profile_items.dart';
 
 import '../../../../../reusable_widgets/reusabel_button.dart';
 
 class BuildProfileBody extends StatelessWidget {
-  const BuildProfileBody({super.key, required this.name, required this.email});
+  const BuildProfileBody({
+    super.key,
+    required this.name,
+    required this.email,
+    this.userData,
+  });
 
   final String name;
   final String email;
+  final dynamic userData;
   Widget _buildActionButtons(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         _miniButton("My Appointment", () {
-          Navigator.pushNamed(context, AppRouter.appointments);
+          if (userData is Doctors && userData != null) {
+            Navigator.pushNamed(
+              context,
+              AppRouter.appointments,
+              arguments: userData,
+            );
+          } else {
+            ShowMessageHandler.showSnackBar(
+              context,
+              message: "No appointment data available",
+              isError: true,
+            );
+          }
         }),
         SizedBox(width: 3.w),
         _miniButton("Medical Records", () {

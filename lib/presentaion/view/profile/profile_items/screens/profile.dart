@@ -5,6 +5,7 @@ import 'package:zest_medical/logic/auth_cubit/auth_cubit.dart';
 import 'package:zest_medical/logic/auth_cubit/auth_state.dart';
 
 import '../../../../../core/utils/no_internet_connections.dart';
+import '../../../../../logic/doctor_cubit/doctor_cubit.dart';
 import '../widgets/profile_widgets/build_blue_header.dart';
 import '../widgets/profile_widgets/build_error_widget.dart';
 import '../widgets/profile_widgets/build_profile_body.dart';
@@ -35,12 +36,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
           }
           if (state is GetProfileSuccessState) {
             final user = state.model.getUserData[0];
+            final doctor = context.read<DoctorCubit>().state;
             return SingleChildScrollView(
               physics: const NeverScrollableScrollPhysics(),
               child: Stack(
                 children: [
                   BuildBlueHeader(),
-                  BuildProfileBody(name: user.name, email: user.email),
+                  BuildProfileBody(
+                    name: user.name,
+                    email: user.email,
+                    userData: doctor.allDoctorsList.isEmpty
+                        ? null
+                        : doctor.homeRecommendedDoctorsList[0],
+                  ),
                   Positioned(
                     top: 13.h,
                     left: 0,

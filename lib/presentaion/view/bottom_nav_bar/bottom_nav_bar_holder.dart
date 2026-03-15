@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zest_medical/logic/toggle/navigate_cubit.dart';
 import '../appointment/appointment_screen.dart';
-import '../home/chats/chat_screen.dart';
+import '../inbox/chat_screen.dart';
 import '../home/home/screen/home_screen.dart';
 import '../profile/profile_items/screens/profile.dart';
 import '../serach/screens/search_screen.dart';

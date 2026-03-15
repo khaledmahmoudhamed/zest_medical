@@ -26,6 +26,7 @@ void main() async {
   await CacheHelper.userBox();
   await CacheHelper.appSettingsBox();
   await CacheHelper.userPaymentsBox();
+  await CacheHelper.recentSearchBox();
   runApp(const MyApp());
 }
 

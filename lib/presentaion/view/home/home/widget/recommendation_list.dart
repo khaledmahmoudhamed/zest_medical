@@ -6,15 +6,21 @@ import '../../../../../core/utils/app_router.dart';
 import '../../../../../data/models/home_model/doctor_info.dart';
 
 class RecommendationList extends StatelessWidget {
-  const RecommendationList({super.key, required this.doctors, this.onTap});
+  const RecommendationList({
+    super.key,
+    required this.doctors,
+    this.onTap,
+    required this.length,
+  });
   final List<Doctors> doctors;
   final void Function()? onTap;
+  final int length;
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       shrinkWrap: true,
       physics: AlwaysScrollableScrollPhysics(),
-      itemCount: doctors.length,
+      itemCount: length,
       itemBuilder: (BuildContext context, int index) {
         return InkWell(
           onTap: () {

@@ -24,9 +24,11 @@ class ReusableTextFormField extends StatelessWidget {
     this.errorText,
     this.inputFormatters,
     this.maxLength,
+    this.onFieldSubmitted,
   });
   final TextEditingController controller;
   final void Function(String)? onChanged;
+  final void Function(String)? onFieldSubmitted;
   final String? hintText;
   final String? errorText;
   final TextStyle? textStyle;
@@ -70,6 +72,7 @@ class ReusableTextFormField extends StatelessWidget {
         disabledBorder: disabledBorder,
       ),
       onChanged: onChanged,
+      onFieldSubmitted: onFieldSubmitted,
     );
   }
 }

@@ -9,14 +9,20 @@ import '../../../../../data/models/home_model/doctor_info.dart';
 class SpecialityBottomSheetSection extends StatelessWidget {
   const SpecialityBottomSheetSection({super.key, required this.doctors});
   final List<Doctors> doctors;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 6.h,
       child: BlocBuilder<DoctorCubit, DoctorState>(
         builder: (BuildContext context, state) {
+          final uniqueSpecialization = doctors
+              .map((e) => e.specialization.name)
+              .toSet()
+              .toList();
+
           return ListView.builder(
-            itemCount: doctors.length,
+            itemCount: uniqueSpecialization.length,
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
@@ -39,7 +45,7 @@ class SpecialityBottomSheetSection extends StatelessWidget {
                   ),
                   child: Text(
                     textAlign: TextAlign.center,
-                    doctors[index].specialization.name,
+                    uniqueSpecialization[index],
                     style: TextStyle(
                       color: !isChecked ? Colors.black87 : Colors.white,
                     ),

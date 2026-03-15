@@ -28,7 +28,10 @@ class _DoctorCardSectionState extends State<DoctorCardSection> {
         if (state.homeStatus == DoctorStatus.loading) {
           return Center(child: CircularProgressIndicator());
         } else if (state.homeStatus == DoctorStatus.loaded) {
-          return RecommendationList(doctors: state.homeRecommendedDoctorsList);
+          return RecommendationList(
+            doctors: state.homeRecommendedDoctorsList,
+            length: state.homeRecommendedDoctorsList.length,
+          );
         } else if (state.homeStatus == DoctorStatus.failed) {
           return BuildErrorWidget(
             error: state.error!,

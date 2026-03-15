@@ -52,12 +52,10 @@ class PreferredSizedWidget extends StatelessWidget
             padding: EdgeInsets.only(left: 3.w, bottom: 1.h),
             child: ArrowBackIos(
               onPressed: () {
-                Navigator.pop(context);
+                Navigator.canPop(context) ? Navigator.pop(context) : SizedBox();
               },
             ),
           ),
-
-          // ... other properties
         ),
       ),
     );

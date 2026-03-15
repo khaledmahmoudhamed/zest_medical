@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zest_medical/presentaion/view/home/doctor_details/screen/doctor_details_screen.dart';
+import 'package:zest_medical/presentaion/view/home/find_nearby/screen/find_nearby_screen.dart';
 import '../../data/models/home_model/doctor_info.dart';
 import '../../presentaion/view/auth/forget_password/screens/add_face_id.dart';
 import '../../presentaion/view/auth/forget_password/screens/forget_password.dart';
@@ -44,6 +45,7 @@ class AppRouter {
   static const doctorSpecialityScreen = '/doctorSpecialityScreen';
   static const recommendationDoctorScreen = '/recommendationDoctorScreen';
   static const doctorDetailsScreen = '/doctorDetailsScreen';
+  static const findNearbyScreen = '/findNearbyScreen';
   static Route generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case initial:
@@ -77,10 +79,13 @@ class AppRouter {
       case medicalRecords:
         return MaterialPageRoute(builder: (_) => MedicalRecordsScreen());
       case appointments:
-        final args = settings.arguments as Doctors;
-        return MaterialPageRoute(
-          builder: (_) => AppointmentsScreen(doctors: args),
-        );
+        if (settings.arguments is Doctors) {
+          final args = settings.arguments as Doctors;
+          return MaterialPageRoute(
+            builder: (_) => AppointmentsScreen(doctors: args),
+          );
+        }
+        return errorModel();
       case paymentScreen:
         return MaterialPageRoute(builder: (_) => PaymentScreen());
       case doctorSpecialityScreen:
@@ -92,6 +97,8 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => DoctorDetailsScreen(doctors: args),
         );
+      case findNearbyScreen:
+        return MaterialPageRoute(builder: (_) => FindNearbyScreen());
 
       default:
         return errorModel();
@@ -100,7 +107,7 @@ class AppRouter {
 
   static Route errorModel() {
     return MaterialPageRoute(
-      builder: (_) => Center(child: Text("Route Error")),
+      builder: (_) => Scaffold(body: Center(child: Text("Route Error"))),
     );
   }
 }

@@ -21,6 +21,7 @@ class SaveButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SharedButton(
+      alignment: Alignment.center,
       onTap: onTap,
       widget: state is UpdateProfileLoadingState
           ? SizedBox(

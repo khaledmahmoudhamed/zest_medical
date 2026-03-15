@@ -16,8 +16,9 @@ class CityBottomSheetSection extends StatelessWidget {
       height: 6.h,
       child: BlocBuilder<DoctorCubit, DoctorState>(
         builder: (BuildContext context, DoctorState state) {
+          final uniqueCity = doctors.map((e) => e.city.name).toSet().toList();
           return ListView.builder(
-            itemCount: doctors.length,
+            itemCount: uniqueCity.length,
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
@@ -39,7 +40,7 @@ class CityBottomSheetSection extends StatelessWidget {
                   ),
                   child: Text(
                     textAlign: TextAlign.center,
-                    doctors[index].city.name,
+                    uniqueCity[index],
                     style: TextStyle(
                       color: state.checkedCityId != doctors[index].city.id
                           ? Colors.black87

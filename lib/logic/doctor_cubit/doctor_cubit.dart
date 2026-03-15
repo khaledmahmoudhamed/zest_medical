@@ -50,6 +50,30 @@ class DoctorCubit extends Cubit<DoctorState> {
     return response;
   }
 
+  Future<void> getAllSpecializations() async {
+    if (state.allSpecializationList.isNotEmpty) return;
+    emit(state.copyWith(allSpecializationStatus: DoctorStatus.loading));
+    final response = await appRepo.getAllSpecializations();
+    response.fold(
+      (error) {
+        emit(
+          state.copyWith(
+            error: error,
+            allSpecializationStatus: DoctorStatus.failed,
+          ),
+        );
+      },
+      (success) {
+        emit(
+          state.copyWith(
+            allSpecializationList: success.doctorData,
+            allSpecializationStatus: DoctorStatus.loaded,
+          ),
+        );
+      },
+    );
+  }
+
   Future<void> getAllDoctors() async {
     if (state.allDoctorsList.isNotEmpty) return;
     emit(state.copyWith(recommendedDoctorStatus: DoctorStatus.loading));

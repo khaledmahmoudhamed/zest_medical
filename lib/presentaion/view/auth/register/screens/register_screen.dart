@@ -119,6 +119,7 @@ class RegisterScreen extends StatelessWidget {
                     state is RegisterLoadingState
                         ? Center(child: CircularProgressIndicator())
                         : SharedButton(
+                            alignment: Alignment.center,
                             onTap: () async {
                               if (formKey.currentState!.validate()) {
                                 context.read<AuthCubit>().register(

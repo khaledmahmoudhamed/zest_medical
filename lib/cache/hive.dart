@@ -8,6 +8,7 @@ class CacheHelper {
   static Box? user;
   static Box? appSettings;
   static Box? payments;
+  static Box? recentSearch;
   static Future<void> init() async {
     final dir = await getApplicationDocumentsDirectory();
     return Hive.init(dir.path);
@@ -27,5 +28,9 @@ class CacheHelper {
 
   static Future<Box> userPaymentsBox() async {
     return payments = await Hive.openBox("userPayments");
+  }
+
+  static Future<Box> recentSearchBox() async {
+    return recentSearch = await Hive.openBox("recentSearch");
   }
 }
