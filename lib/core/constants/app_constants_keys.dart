@@ -17,7 +17,9 @@ class ApiKeys {
   static const userPaymentStatus = "userPaymentStatus";
   static const addPaymentMethod = "paymentsList";
   static const doctors = "doctors";
+  static const doctor = "doctor";
   static const id = "id";
+  static const doctorId = "doctor_id";
   static const photo = "photo";
   static const address = "address";
   static const description = "description";
@@ -32,4 +34,6 @@ class ApiKeys {
   static const userBookingDate = "userBookingDate";
   static const userBookingType = "userBookingType";
   static const userBookingPaymentMethod = "userBookingPaymentMethod";
+  static const appointmentTime = "appointment_time";
+  static const appointmentEndTime = "appointment_end_time";
 }

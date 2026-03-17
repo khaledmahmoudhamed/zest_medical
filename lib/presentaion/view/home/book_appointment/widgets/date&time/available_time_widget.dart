@@ -23,8 +23,7 @@ class _AvailableTimeWidgetState extends State<AvailableTimeWidget> {
     "10:30 AM",
   ];
 
-  int selectedIndex = 1;
-
+  int selectedIndex = -1;
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
@@ -47,10 +46,6 @@ class _AvailableTimeWidgetState extends State<AvailableTimeWidget> {
             setState(() {
               selectedIndex = index;
             });
-            await CacheHelper.user!.put(
-              ApiKeys.userBookingDate,
-              availableTimes[index],
-            );
           },
           child: Text(
             availableTimes[index],

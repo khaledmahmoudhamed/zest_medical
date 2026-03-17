@@ -82,13 +82,13 @@ class _SearchScreenState extends State<SearchScreen> {
                   return Center(child: CircularProgressIndicator());
                 } else if (state.recommendedDoctorStatus ==
                     DoctorStatus.loaded) {
-                  return controller.text.isEmpty
+                  return /*controller.text.isEmpty
                       ? RecentSearchWidget()
-                      : Expanded(
-                          child: SearchBySpecializationsWidget(
-                            doctors: state.allDoctorsList,
-                          ),
-                        );
+                      :*/ Expanded(
+                    child: SearchBySpecializationsWidget(
+                      doctors: state.allDoctorsList,
+                    ),
+                  );
                 } else if (state.searchDoctorStatus == DoctorStatus.failed) {
                   return Center(child: Text(state.error!));
                 } else {

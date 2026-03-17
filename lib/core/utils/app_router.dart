@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:zest_medical/presentaion/view/home/doctor_details/screen/doctor_details_screen.dart';
 import 'package:zest_medical/presentaion/view/home/find_nearby/screen/find_nearby_screen.dart';
 import '../../data/models/home_model/doctor_info.dart';
+import '../../presentaion/view/appointment/widget/reschedule/reschedule_screen.dart';
+import '../../presentaion/view/appointment/widget/reschedule/success_booking_screen.dart';
 import '../../presentaion/view/auth/forget_password/screens/add_face_id.dart';
 import '../../presentaion/view/auth/forget_password/screens/forget_password.dart';
 import '../../presentaion/view/auth/forget_password/screens/otp_verification.dart';
@@ -46,6 +48,8 @@ class AppRouter {
   static const recommendationDoctorScreen = '/recommendationDoctorScreen';
   static const doctorDetailsScreen = '/doctorDetailsScreen';
   static const findNearbyScreen = '/findNearbyScreen';
+  static const rescheduleScreen = '/rescheduleScreen';
+  static const successBookingScreen = '/successBookingScreen';
   static Route generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case initial:
@@ -79,12 +83,14 @@ class AppRouter {
       case medicalRecords:
         return MaterialPageRoute(builder: (_) => MedicalRecordsScreen());
       case appointments:
+        // final args = settings.arguments as Map<String, dynamic>;
         if (settings.arguments is Doctors) {
           final args = settings.arguments as Doctors;
           return MaterialPageRoute(
             builder: (_) => AppointmentsScreen(doctors: args),
           );
         }
+
         return errorModel();
       case paymentScreen:
         return MaterialPageRoute(builder: (_) => PaymentScreen());
@@ -92,6 +98,17 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => DoctorSpecialityScreen());
       case recommendationDoctorScreen:
         return MaterialPageRoute(builder: (_) => RecommendationDoctorScreen());
+      case rescheduleScreen:
+        // if (settings.arguments is Doctors) {
+        final args = settings.arguments as Map<String, dynamic>;
+        return MaterialPageRoute(
+          builder: (_) => RescheduleScreen(
+            doctors: args['doctor'] as Doctors,
+            // dateTime: args['dateTime'] as String,
+          ),
+        );
+      // }
+      // return errorModel();
       case doctorDetailsScreen:
         final args = settings.arguments as Doctors;
         return MaterialPageRoute(
@@ -99,6 +116,15 @@ class AppRouter {
         );
       case findNearbyScreen:
         return MaterialPageRoute(builder: (_) => FindNearbyScreen());
+      case successBookingScreen:
+        final args = settings.arguments as Map<String, dynamic>;
+        return MaterialPageRoute(
+          builder: (_) => SuccessBookingScreen(
+            doctors: args['doctor'] as Doctors,
+            dateTime: args['dateTime'] as String,
+            title: args['title'] as String,
+          ),
+        );
 
       default:
         return errorModel();

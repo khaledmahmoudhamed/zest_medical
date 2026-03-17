@@ -89,7 +89,7 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
 
           // Safe error mapping
           final apiErrors = (state is UpdateProfileFailedState)
-              ? state.error.errors
+              ? state.error.error
               : null;
 
           return Padding(

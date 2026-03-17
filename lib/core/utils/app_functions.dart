@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:zest_medical/data/models/errors/error_model.dart';
+import 'package:zest_medical/data/models/errors/update_profile_error_model.dart';
+
+import '../../data/models/errors/error_model.dart';
 
 class ServerExceptions implements Exception {
   ErrorModel errorModel;

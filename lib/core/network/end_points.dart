@@ -7,6 +7,8 @@ class EndPoints {
   static const allSpecializations = "/specialization/index";
   static const homeRecommendedDoctor = "/home/index";
   static const allDoctors = "/doctor/index";
+  static const postAppointment = "/appointment/store";
+  static const getAppointment = "/appointment/index";
   static String filterDoctorsByCity(int id) => "/doctor/doctor-filter?city=$id";
   static String filterDoctorsBySpeciality(int id) =>
       "/doctor/doctor-filter?specialization=$id";

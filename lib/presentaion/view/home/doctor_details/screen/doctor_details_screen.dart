@@ -12,7 +12,7 @@ import '../widget/default_tab_bar_controller.dart';
 import '../widget/header_card.dart';
 
 class DoctorDetailsScreen extends StatelessWidget {
-  DoctorDetailsScreen({super.key, required this.doctors});
+  const DoctorDetailsScreen({super.key, required this.doctors});
   final Doctors doctors;
   @override
   Widget build(BuildContext context) {
@@ -69,6 +69,9 @@ class DoctorDetailsScreen extends StatelessWidget {
                 phone: doctors.phone,
                 price: doctors.appointPrice,
                 practicePlace: doctors.address,
+                text1: 'About',
+                text2: 'Location',
+                text3: 'Review',
               ),
             ),
           ],

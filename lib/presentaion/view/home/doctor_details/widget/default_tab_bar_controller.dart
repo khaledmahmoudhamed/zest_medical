@@ -13,6 +13,9 @@ class DefaultTabBarControllerWidget extends StatelessWidget {
     required this.phone,
     required this.price,
     required this.practicePlace,
+    required this.text1,
+    required this.text2,
+    required this.text3,
   });
   final String description;
   final String startTime;
@@ -20,6 +23,9 @@ class DefaultTabBarControllerWidget extends StatelessWidget {
   final String phone;
   final String practicePlace;
   final int price;
+  final String text1;
+  final String text2;
+  final String text3;
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -33,9 +39,9 @@ class DefaultTabBarControllerWidget extends StatelessWidget {
             labelColor: Color(0xff247CFF),
             unselectedLabelColor: Colors.grey,
             tabs: [
-              Tab(text: 'About'),
-              Tab(text: "Location"),
-              Tab(text: "Review"),
+              Tab(text: text1),
+              Tab(text: text2),
+              Tab(text: text3),
             ],
           ),
           Expanded(

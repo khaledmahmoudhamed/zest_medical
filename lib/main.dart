@@ -11,6 +11,7 @@ import 'package:zest_medical/data/services/service_locator.dart';
 import 'package:zest_medical/logic/auth_cubit/auth_cubit.dart';
 import 'package:zest_medical/logic/doctor_cubit/doctor_cubit.dart';
 import 'package:zest_medical/logic/medical_cubit/medical_cubit.dart';
+import 'package:zest_medical/logic/patient_cubit/patient_cubit.dart';
 import 'package:zest_medical/logic/rating_cubit/rating_cubit.dart';
 import 'package:zest_medical/logic/toggle/navigate_cubit.dart';
 import 'package:zest_medical/logic/toggle/toggle_icon_cubit.dart';
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
           providers: [
             BlocProvider(create: (context) => getIt<AuthCubit>()),
             BlocProvider(create: (context) => getIt<DoctorCubit>()),
+            BlocProvider(create: (context) => getIt<PatientCubit>()),
 
             BlocProvider(create: (context) => ToggleIconCubit()),
             BlocProvider(create: (context) => RatingCubit()),

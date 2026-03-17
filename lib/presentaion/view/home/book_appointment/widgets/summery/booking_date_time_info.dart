@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../../../../cache/hive.dart';
 import '../../../../../../core/constants/app_constants_keys.dart';
 
 class BookingDateTimeInfo extends StatelessWidget {
-  BookingDateTimeInfo({super.key});
-  final day = CacheHelper.user!.get(ApiKeys.userBookingDay);
-  final time = CacheHelper.user!.get(ApiKeys.userBookingDate);
+  const BookingDateTimeInfo({super.key, required this.day});
+
+  final String day;
+
+  String getFormattedDate(String day) {
+    DateTime date = day.isEmpty ? DateTime.now() : DateTime.parse(day);
+    return DateFormat('EEEE, MMMM dd, yyyy').format(date);
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -28,8 +35,11 @@ class BookingDateTimeInfo extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(day ?? '', style: TextStyle(fontSize: 16.sp)),
-          Text(time ?? '', style: TextStyle(fontSize: 16.sp)),
+          Text(
+            day.isEmpty ? getFormattedDate(day) : day,
+            style: TextStyle(fontSize: 16.sp),
+          ),
+          // Text(time ?? '', style: TextStyle(fontSize: 16.sp)),
         ],
       ),
     );

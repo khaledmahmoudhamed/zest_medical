@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:zest_medical/data/models/errors/error_model.dart';
+import 'package:zest_medical/data/models/errors/update_profile_error_model.dart';
+import '../../data/models/errors/error_model.dart';
 import '../../data/models/home_model/doctor_info.dart';
 import '../../data/models/home_model/home_recommended_model.dart';
 import '../../data/models/user_model/login_model.dart';

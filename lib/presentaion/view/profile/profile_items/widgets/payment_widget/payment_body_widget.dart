@@ -97,8 +97,22 @@ class _PaymentBodyWidgetState extends State<PaymentBodyWidget> {
                         setState(() {
                           paymentMethodItems.removeAt(index);
                         });
-                        await CacheHelper.payments!.delete(dismissedItemTitle);
-                        await savePaymentList();
+
+                        try {
+                          await CacheHelper.payments!.delete(
+                            dismissedItemTitle,
+                          );
+                          await savePaymentList();
+                          if (mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text("$dismissedItemTitle removed"),
+                              ),
+                            );
+                          }
+                        } catch (e) {
+                          debugPrint("Error deleting payment: $e");
+                        }
                       },
 
                       child: PaymentMethodWidget(
@@ -107,31 +121,7 @@ class _PaymentBodyWidgetState extends State<PaymentBodyWidget> {
                         title: paymentMethodItems[index]['title'],
                         subTitle: paymentMethodItems[index]['cardNumber'],
                         status: paymentMethodItems[index]['status'],
-                        onTap: () {
-                          ShowMessageHandler.showAppDialog(
-                            context: context,
-                            content: "Are you sure that completing payment?",
-                            title: "Payment",
-                            cancel: "No",
-                            ok: "Yes",
-                            okColor: Colors.blue,
-                            cancelColor: Colors.red,
-                            onPressed: () {
-                              Navigator.pop(context);
-                              ShowMessageHandler.showSuccessDialog(
-                                context: context,
-
-                                onTap: () {
-                                  Navigator.pop(context);
-                                },
-                                title: "Payment Successful!",
-                                subTitle:
-                                    "Your transaction was completed Successfully.",
-                                close: "Back",
-                              );
-                            },
-                          );
-                        },
+                        onTap: () {},
                       ),
                     );
                   },

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:zest_medical/presentaion/view/home/book_appointment/widgets/date&time/select_date_widget.dart';
-
 import 'appointment_type_widget.dart';
 import 'available_time_widget.dart';
 
 class DateTimeStepperWidget extends StatefulWidget {
-  const DateTimeStepperWidget({super.key});
-
+  const DateTimeStepperWidget({super.key, required this.onDateChange});
+  final void Function(DateTime)? onDateChange;
   @override
   State<DateTimeStepperWidget> createState() => _DateTimeStepperWidgetState();
 }
@@ -23,7 +22,7 @@ class _DateTimeStepperWidgetState extends State<DateTimeStepperWidget> {
           "Select Date",
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.sp),
         ),
-        SelectDateWidget(),
+        SelectDateWidget(onDateChange: widget.onDateChange),
         SizedBox(height: 2.h),
         Text(
           "Available Time",
