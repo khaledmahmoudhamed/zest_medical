@@ -25,6 +25,7 @@ class ReusableTextFormField extends StatelessWidget {
     this.inputFormatters,
     this.maxLength,
     this.onFieldSubmitted,
+    this.focusNode,
   });
   final TextEditingController controller;
   final void Function(String)? onChanged;
@@ -47,9 +48,11 @@ class ReusableTextFormField extends StatelessWidget {
   final String? labelText;
   final List<TextInputFormatter>? inputFormatters;
   final int? maxLength;
+  final FocusNode? focusNode;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      focusNode: focusNode,
       validator: validator,
       controller: controller,
       style: textStyle,

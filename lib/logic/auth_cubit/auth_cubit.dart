@@ -130,12 +130,10 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  final GoogleSignIn _googleSignIn = GoogleSignIn.instance;
   Future<void> signInWithGoogle(BuildContext context) async {
     try {
-      final GoogleSignInAccount? googleUser = await _googleSignIn
+      final GoogleSignInAccount? googleUser = await GoogleSignIn.instance
           .authenticate();
-
       if (googleUser == null) return; // User canceled
       final GoogleSignInAuthentication googleAuth = googleUser.authentication;
       final AuthCredential credential = GoogleAuthProvider.credential(

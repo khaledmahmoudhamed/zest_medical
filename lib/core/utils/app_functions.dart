@@ -11,9 +11,7 @@ class ServerExceptions implements Exception {
 
 class AppFunctions {
   static void handleDioExceptions(DioException e) {
-    print("=========== DioError caught: ${e.type}");
     if (e.response != null && e.response!.data != null) {
-      print("=========== DioError caught: ${e.type}");
       if (e.response!.data is Map<String, dynamic>) {
         throw ServerExceptions(
           errorModel: ErrorModel.fromJson(e.response!.data),
@@ -28,7 +26,6 @@ class AppFunctions {
     }
     switch (e.type) {
       case DioExceptionType.connectionError:
-        print("=========== DioError caught: ${e.type}");
         throw ServerExceptions(
           errorModel: ErrorModel(
             message:
@@ -47,7 +44,6 @@ class AppFunctions {
           errorModel: ErrorModel.fromJson(e.response!.data),
         );
       case DioExceptionType.unknown:
-        // Check if it's a socket/http exception
         if (e.message?.contains('HttpException') ?? false) {
           throw ServerExceptions(
             errorModel: ErrorModel(
@@ -57,7 +53,6 @@ class AppFunctions {
         }
         throw "An unexpected error occurred.";
       case DioExceptionType.badResponse:
-        print("=========== DioError caught: ${e.type}");
         switch (e.response!.statusCode) {
           case 400:
           case 401:
@@ -65,6 +60,7 @@ class AppFunctions {
           case 404:
           case 409:
           case 504:
+          case 422:
             throw ServerExceptions(
               errorModel: ErrorModel.fromJson(e.response!.data),
             );
@@ -73,10 +69,6 @@ class AppFunctions {
               errorModel: ErrorModel(
                 message: "Server is currently under maintenance",
               ),
-            );
-          case 422:
-            throw ServerExceptions(
-              errorModel: ErrorModel.fromJson(e.response!.data),
             );
           default:
             throw ServerExceptions(

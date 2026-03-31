@@ -83,7 +83,9 @@ class _PaymentBodyWidgetState extends State<PaymentBodyWidget> {
                   itemCount: paymentMethodItems.length,
                   itemBuilder: (context, index) {
                     return Dismissible(
-                      key: Key(paymentMethodItems[index]['title']),
+                      key: Key(
+                        "${paymentMethodItems[index]['title']}_${paymentMethodItems[index]['cardNumber']}",
+                      ),
                       background: Container(
                         alignment: Alignment.centerRight,
                         padding: EdgeInsets.symmetric(horizontal: 20),
@@ -116,7 +118,9 @@ class _PaymentBodyWidgetState extends State<PaymentBodyWidget> {
                       },
 
                       child: PaymentMethodWidget(
-                        key: ValueKey(paymentMethodItems[index]['title']),
+                        key: ValueKey(
+                          "${paymentMethodItems[index]['title']}_${paymentMethodItems[index]['cardNumber']}",
+                        ),
                         image: paymentMethodItems[index]['image'],
                         title: paymentMethodItems[index]['title'],
                         subTitle: paymentMethodItems[index]['cardNumber'],

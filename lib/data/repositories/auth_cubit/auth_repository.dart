@@ -126,23 +126,4 @@ class AppRepository {
       return left(e.errorModel.message);
     }
   }
-
-  List<Map<String, dynamic>> getDiseasesImages() {
-    return [
-      {'name': 'General', "image": "assets/diseases/general.png"},
-      {'name': 'Neurology', "image": "assets/diseases/neurology.png"},
-      {'name': 'Pediatrics', "image": "assets/diseases/pediatric.png"},
-      {'name': 'Dermatology', "image": "assets/diseases/dermatology.png"},
-      {'name': 'Cardiology', "image": "assets/diseases/cardiology.png"},
-      {'name': 'Orthopedics', "image": "assets/diseases/arthritis.png"},
-      {'name': 'Gynecology', "image": "assets/diseases/maternity.png"},
-      {'name': 'Ophthalmology', "image": "assets/diseases/ophthalmology.png"},
-      {'name': 'Urology', "image": "assets/diseases/kidney.png"},
-      {
-        'name': 'Gastroenterology',
-        "image": "assets/diseases/gastroenterology.png",
-      },
-      {'name': 'Psychiatry', "image": "assets/diseases/psychiatry.png"},
-    ];
-  }
 }

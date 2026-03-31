@@ -13,19 +13,9 @@ import 'package:zest_medical/logic/doctor_cubit/doctor_state.dart';
 import '../../data/models/home_model/doctor_info.dart';
 
 class DoctorCubit extends Cubit<DoctorState> {
-  DoctorCubit({required this.appRepo}) : super(InitialDoctorState()) {
-    subscription = Connectivity().onConnectivityChanged.listen((status) {
-      if (!status.contains(ConnectivityResult.none)) {}
-    });
-  }
+  DoctorCubit({required this.appRepo}) : super(InitialDoctorState());
 
   final DoctorRepo appRepo;
-  StreamSubscription? subscription;
-  @override
-  Future<void> close() {
-    subscription!.cancel();
-    return super.close();
-  }
 
   Future<void> homeRecommendedDoctors() async {
     if (state.homeRecommendedDoctorsList.isNotEmpty) return;
@@ -173,169 +163,6 @@ class DoctorCubit extends Cubit<DoctorState> {
     );
   }
 
-  //
-  // Future<void> getAllDoctors() async {
-  //   if (state.allDoctorsList.isNotEmpty) return;
-  //   emit(state.copyWith(recommendedDoctorStatus: DoctorStatus.loading));
-  //   final response = await appRepo.getAllDoctors();
-  //   response.fold(
-  //     (error) {
-  //       emit(
-  //         state.copyWith(
-  //           error: error,
-  //           recommendedDoctorStatus: DoctorStatus.failed,
-  //         ),
-  //       );
-  //     },
-  //     (success) {
-  //       emit(
-  //         state.copyWith(
-  //           allDoctorsList: success.doctorData,
-  //           recommendedDoctorStatus: DoctorStatus.loaded,
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
-  //
-  // Future<void> filterDoctorsByCity(int id) async {
-  //   emit(
-  //     state.copyWith(
-  //       // filterDoctorStatus: DoctorStatus.loading,
-  //       checkedCityId: id,
-  //     ),
-  //   );
-  //   //  final response = await appRepo.filterByCity(id);
-  //   // /* response.fold(
-  //   //    (error) {
-  //   //      emit(
-  //   //        state.copyWith(filterDoctorStatus: DoctorStatus.failed, error: error),
-  //   //      );
-  //   //    },
-  //   //    (success) {
-  //   //      emit(
-  //   //        state.copyWith(
-  //   //          filterDoctorStatus: DoctorStatus.loaded,
-  //   //          // displayedDoctorsList: success.doctorData,
-  //   //          checkedCityId: id,
-  //   //        ),
-  //   //      );
-  //   //    },
-  //   //  );*/
-  // }
-  //
-  // Future<void> filterDoctorsBySpeciality(int? id) async {
-  //   emit(
-  //     state.copyWith(
-  //       // filterDoctorStatus: DoctorStatus.loading,
-  //       checkedSpecialityId: id,
-  //     ),
-  //   );
-  //   // final response = await appRepo.filterBySpeciality(id!);
-  //   // response.fold(
-  //   //   (error) {
-  //   //     emit(
-  //   //       state.copyWith(filterDoctorStatus: DoctorStatus.failed, error: error),
-  //   //     );
-  //   //   },
-  //   //   (success) {
-  //   //     emit(
-  //   //       state.copyWith(
-  //   //         filterDoctorStatus: DoctorStatus.loaded,
-  //   //         checkedSpecialityId: id,
-  //   //         // displayedDoctorsList: success.doctorData,
-  //   //       ),
-  //   //     );
-  //   //   },
-  //   // );
-  // }
-  //
-  // void clearAllFilters() {
-  //   emit(
-  //     state.copyWith(
-  //       checkedCityId: null,
-  //       checkedSpecialityId: null,
-  //       searchQuery: '',
-  //     ),
-  //   );
-  // }
-  //
-  // Future<void> searchMainDoctors(String name) async {
-  //   if (name.isEmpty) {
-  //     emit(state.copyWith(searchDoctorsList: state.allDoctorsList));
-  //     return;
-  //   }
-  //
-  //   emit(state.copyWith(searchDoctorStatus: DoctorStatus.loading));
-  //   final response = await appRepo.searchDoctors(name);
-  //   response.fold(
-  //     (error) => emit(
-  //       state.copyWith(searchDoctorStatus: DoctorStatus.failed, error: error),
-  //     ),
-  //     (success) => emit(
-  //       state.copyWith(
-  //         searchDoctorStatus: DoctorStatus.loaded,
-  //         searchDoctorsList: success.doctorData,
-  //         searchQuery: name,
-  //       ),
-  //     ),
-  //   );
-  // }
-  //
-  // Future<void> recommendedSearchDoctors(String name) async {
-  //   if (name.isEmpty) {
-  //     emit(state.copyWith(searchQuery: name));
-  //     return;
-  //   }
-  //
-  //   /*final response = await appRepo.searchDoctors(name);
-  //   response.fold(
-  //     (error) => emit(state.copyWith(error: error)),
-  //     (success) => emit(
-  //       state.copyWith(
-  //         displayedDoctorsList: success.doctorData,
-  //         // searchQuery: name,
-  //         // Only updates recommendation list
-  //       ),
-  //     ),
-  //   );*/
-  // }
-  //
-  // Future<void> chatSearchDoctors(String name) async {
-  //   if (name.isEmpty) {
-  //     emit(state.copyWith(searchQuery: name));
-  //     return;
-  //   }
-  //
-  //   /* final response = await appRepo.searchDoctors(name);
-  //   response.fold(
-  //     (error) => emit(state.copyWith(error: error)),
-  //     (success) => emit(
-  //       state.copyWith(
-  //         chatDoctorsList: success.doctorData, // Only updates chat list
-  //         searchQuery: name,
-  //       ),
-  //     ),
-  //   );*/
-  // }
-  //
-  // Future<void> createDoctorsMessage(String name) async {
-  //   if (name.isEmpty) {
-  //     emit(state.copyWith(createMessageList: state.allDoctorsList));
-  //     return;
-  //   }
-  //
-  //   final response = await appRepo.searchDoctors(name);
-  //   response.fold(
-  //     (error) => emit(state.copyWith(error: error)),
-  //     (success) => emit(
-  //       state.copyWith(
-  //         createMessageList: success.doctorData, // Only updates creation list
-  //       ),
-  //     ),
-  //   );
-  // }
-
   List<MessageModel> chatMessages = [];
   final List<String> doctorReplies = [
     "Hello! I received your message. How can I help you today?",
@@ -353,7 +180,7 @@ class DoctorCubit extends Cubit<DoctorState> {
       isImage: false,
     );
     chatMessages.insert(0, userMsg);
-    CacheHelper.chatMessages!.add(userMsg);
+    // CacheHelper.chatMessages!.add(userMsg);
     emit(state.copyWith(messageList: List.from(chatMessages)));
 
     Timer(Duration(seconds: 2), () async {
@@ -365,7 +192,7 @@ class DoctorCubit extends Cubit<DoctorState> {
           isImage: false,
         );
         chatMessages.insert(0, docMsg);
-        CacheHelper.chatMessages!.add(docMsg);
+        //  CacheHelper.chatMessages!.add(docMsg);
         emit(state.copyWith(messageList: List.from(chatMessages)));
         messageCounter++;
       } else {

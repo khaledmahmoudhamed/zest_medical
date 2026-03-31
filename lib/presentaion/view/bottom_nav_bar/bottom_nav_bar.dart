@@ -100,16 +100,7 @@ class BottomNavBar extends StatelessWidget {
                           ? NetworkImage(image)
                           : null,
                       child: image.isEmpty
-                          ? /*Icon(
-                              Icons.person,
-                              color: currentIndex == 4
-                                  ? const Color(0xff247CFF)
-                                  : Colors.black,
-                              size: 25.sp,
-                            )*/ SvgPicture.asset(
-                              "assets/profile.svg",
-                              width: 25.sp,
-                            )
+                          ? SvgPicture.asset("assets/profile.svg", width: 25.sp)
                           : null,
                     ),
                   ),

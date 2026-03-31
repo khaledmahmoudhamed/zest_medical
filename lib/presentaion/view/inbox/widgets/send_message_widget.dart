@@ -54,6 +54,7 @@ class _SendMessageWidgetState extends State<SendMessageWidget> {
               children: [
                 Expanded(
                   child: ReusableTextFormField(
+                    focusNode: focusNode,
                     controller: controller,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15.sp),
